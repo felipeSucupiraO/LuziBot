@@ -3,6 +3,7 @@ import discord
 
 bot = discord.Client()
 
+
 @bot.event
 async def on_ready():
     print("Bot Ready. \nLogged in as " + bot.user.name)
@@ -18,7 +19,7 @@ async def on_message (message):
     if message.content.startswith("luzi ping"):
         await message.channel.send("Pong!")
 
-    with open ("helpMessage.txt", "r") as f:
+    with open ("files\helpMessage.txt", "r") as f:
         helpMessage = f.read()
     if message.content.startswith("luzi help"):
         await message.channel.send(helpMessage)
