@@ -3,3 +3,4 @@ Lista de comandos (prefixo "luzi")
 - "help": Luzi apresenta a lista de todos os comandos
 - "oi": Luzi se apresenta
 - "ping": Luzi devolve
+- teste
