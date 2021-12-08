@@ -24,5 +24,10 @@ async def on_message (message):
     if message.content.startswith("luzi help"):
         await message.channel.send(helpMessage)
 
+    with open ("files\geraldoMessage.txt", "r") as f:
+        geraldoMessage = f.read()
+    if message.content.startswith("luzi ripgeraldo"):
+        await message.channel.send(geraldoMessage)
+
 
 bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
