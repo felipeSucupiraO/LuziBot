@@ -1,28 +1,27 @@
 import discord
 
 
-class MyClient (discord.Client):
-    async def on_ready(self):
-        print("Bot Ready. \nLogged in as {0.user}".format(self.user))
+bot = discord.Client()
+
+@bot.event
+async def on_ready():
+    print("Bot Ready. \nLogged in as " + bot.user.name)
+
+@bot.event
+async def on_message (message):
+    if message.author == bot.user:
+        return
+
+    if message.content.startswith("luzi oi"):
+        await message.channel.send("Olá")
+
+    if message.content.startswith("luzi ping"):
+        await message.channel.send("Pong!")
+
+    with open ("helpMessage.txt", "r") as f:
+        helpMessage = f.read()
+    if message.content.startswith("luzi help"):
+        await message.channel.send(helpMessage)
 
 
-    async def on_message(self, message):
-        with open ("comandsList.txt", "r") as f:
-            commandsList = f.read()
-        if message.author == self.user:
-            return
-
-        if message.content.startswith("luzi oi"):
-            await message.channel.send("Olá")
-
-        if message.content.startswith("luzi ping"):
-            await message.channel.send("Pong!")
-
-        if message.content.startswith("luzi help"):
-            await message.channel.send(commandsList)
-
-
-client = MyClient()
-client.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.NSEiWxLYNcs2xASZsIwHSVlOgiQ')
-
-#Find a way for the commandsList variable to be equal to the txt
+bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
