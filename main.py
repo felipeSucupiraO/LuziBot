@@ -18,16 +18,16 @@ async def ping(ctx):
 async def oi(ctx):
     await ctx.send("Prazer, Luzineria, agora cala a boca e enche a porra do meu tanque caralho")
 
-with open ("files\helpMessage.txt", "r") as f:
-    helpMessage = f.read()
 @bot.command()
 async def helpie(ctx):
+    with open ("files\helpMessage.txt", "r") as f:
+        helpMessage = f.read()
     await ctx.send(helpMessage)
 
-with open ("files\geraldoMessage.txt", "r") as f:
-    geraldoMessage = f.read()
 @bot.command()
 async def ripgeraldo(ctx):
+    with open ("files\geraldoMessage.txt", "r") as f:
+        geraldoMessage = f.read()
     await ctx.send(geraldoMessage)
 
 
