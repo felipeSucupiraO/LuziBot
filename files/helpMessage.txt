@@ -4,3 +4,4 @@ Lista de comandos (prefixo "luzi")
 - "oi": Luzi se apresenta.
 - "ping": Luzi devolve, e aproveita pra falar o ping dela.
 - "ripgeraldo": Luzi faz uma homenagem ao primério e originário geraldo.
+- "diga": Luzi dirá qualquer coisa que você quiser, se você colocar a coisa separada por um espaço

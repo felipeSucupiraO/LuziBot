@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import discord
 from discord.ext import commands
 
@@ -29,6 +30,10 @@ async def ripgeraldo(ctx):
     with open ("files\geraldoMessage.txt", "r") as f:
         geraldoMessage = f.read()
     await ctx.send(geraldoMessage)
+
+@bot.command()
+async def diga (ctx, *, message):
+    await ctx.send(message)
 
 
 bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
