@@ -1,6 +1,7 @@
 from asyncio.windows_events import NULL
 import discord
 from discord.ext import commands
+import random
 
 
 bot = commands.Bot(command_prefix = "luzi ")
@@ -35,5 +36,30 @@ async def ripgeraldo(ctx):
 async def diga (ctx, *, message):
     await ctx.send(message)
 
+
+@bot.command(aliases = ["8ball"])
+async def bola8 (ctx, *, question):
+    responses = [
+        "Com certeza!", 
+        "Já foi decidido que sim.",
+        "Sem dúvidas!",
+        "Sim, definitivamente.", 
+        "Você pode contar com isso.", 
+        "Pelo que eu vejo, sim.", 
+        "Ao que tudo indica, sim.", 
+        "Parece que sim.", 
+        "Sim", 
+        "Os sinais dizem que sim.", 
+        "Está muito vago para dizer. Tente novamente.", 
+        "Pergunte novamente mais tarde.", 
+        "É melhor não te dizer agora.", 
+        "Não consigo prever agora.", 
+        "Se concentre e pergunte novamente.", 
+        "Não conte com isso.", 
+        "Minha resposta é não.", 
+        "Minhas fontes dizem que não.", 
+        "Parece que não.", 
+        "Aparentemente não."]
+    await ctx.send (random.choice(responses))
 
 bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
