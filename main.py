@@ -1,33 +1,34 @@
 import discord
+from discord.ext import commands
 
 
-bot = discord.Client()
+bot = commands.Bot(command_prefix = "luzi ")
 
 
 @bot.event
 async def on_ready():
-    print("Bot Ready. \nLogged in as " + bot.user.name)
+    print ("Bot is online")
+    print ("Logged in as " + bot.user.name)
 
-@bot.event
-async def on_message (message):
-    if message.author == bot.user:
-        return
+@bot.command()
+async def ping(ctx):
+    await ctx.send("Pong!")
 
-    if message.content.startswith("luzi oi"):
-        await message.channel.send("Olá")
+@bot.command()
+async def oi(ctx):
+    await ctx.send("Prazer, Luzineria, agora cala a boca e enche a porra do meu tanque caralho")
 
-    if message.content.startswith("luzi ping"):
-        await message.channel.send("Pong!")
+with open ("files\helpMessage.txt", "r") as f:
+    helpMessage = f.read()
+@bot.command()
+async def helpie(ctx):
+    await ctx.send(helpMessage)
 
-    with open ("files\helpMessage.txt", "r") as f:
-        helpMessage = f.read()
-    if message.content.startswith("luzi help"):
-        await message.channel.send(helpMessage)
-
-    with open ("files\geraldoMessage.txt", "r") as f:
-        geraldoMessage = f.read()
-    if message.content.startswith("luzi ripgeraldo"):
-        await message.channel.send(geraldoMessage)
+with open ("files\geraldoMessage.txt", "r") as f:
+    geraldoMessage = f.read()
+@bot.command()
+async def ripgeraldo(ctx):
+    await ctx.send(geraldoMessage)
 
 
 bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
