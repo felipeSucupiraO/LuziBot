@@ -2,5 +2,5 @@ Lista de comandos (prefixo "luzi")
 
 - "help": Luzi apresenta a lista de todos os comandos.
 - "oi": Luzi se apresenta.
-- "ping": Luzi devolve.
+- "ping": Luzi devolve, e aproveita pra falar o ping dela.
 - "ripgeraldo": Luzi faz uma homenagem ao primério e originário geraldo.
