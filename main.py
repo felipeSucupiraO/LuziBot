@@ -12,7 +12,7 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send("Pong!")
+    await ctx.send("Pong! Latência: " + (str(bot.latency * 1000)) + "ms")
 
 @bot.command()
 async def oi(ctx):
