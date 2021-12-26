@@ -19,7 +19,7 @@ async def ping(ctx):
 
 @bot.command()
 async def oi(ctx):
-    await ctx.send("Prazer, Luzineria, agora cala a boca e enche a porra do meu tanque caralho")
+    await ctx.send("Olá, prazer, Luzineria, agora cala a boca e trás a porra da gasolina caralho")
 
 @bot.command()
 async def helpie(ctx):
@@ -34,12 +34,15 @@ async def ripgeraldo(ctx):
     await ctx.send(geraldoMessage)
 
 @bot.command()
-async def diga (ctx, *, message):
-    await ctx.send(message)
+async def diga (ctx, *, message = "null"):
+    if (message == "null"):
+        await ctx.send("O que tu quer que eu fale porra?")
+    else:
+        await ctx.send(message)
 
 
 @bot.command(aliases = ["8ball"])
-async def bola8 (ctx, *, question):
+async def bola8 (ctx, *, question = "null"):
     responses = [
         "Com certeza!", 
         "Já foi decidido que sim.",
@@ -61,7 +64,10 @@ async def bola8 (ctx, *, question):
         "Minhas fontes dizem que não.", 
         "Parece que não.", 
         "Aparentemente não."]
-    await ctx.send (random.choice(responses))
+    if (question == "null"):
+        await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
+    else:
+        await ctx.send ("Tu perguntou: \"" + question + "\"\n" + random.choice(responses))
 
 @bot.command()
 async def apagar (ctx, amount = 1):
