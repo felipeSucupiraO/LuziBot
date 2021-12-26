@@ -11,6 +11,8 @@ async def on_ready():
     print ("Bot is online")
     print ("Logged in as " + bot.user.name)
 
+#Comandos
+
 @bot.command()
 async def ping(ctx):
     await ctx.send("Pong! Latência: " + (str(round(bot.latency * 1000))) + "ms")
@@ -60,5 +62,11 @@ async def bola8 (ctx, *, question):
         "Parece que não.", 
         "Aparentemente não."]
     await ctx.send (random.choice(responses))
+
+@bot.command()
+async def apagar (ctx, amount = 1):
+    await ctx.channel.purge(limit = (amount + 1))
+
+#Iniciação do bot
 
 bot.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
