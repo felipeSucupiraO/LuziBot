@@ -23,15 +23,15 @@ async def oi(ctx):
 
 @bot.command()
 async def helpie(ctx):
-    with open ("files\helpMessage.txt", "r") as f:
-        helpMessage = f.read()
-    await ctx.send(helpMessage)
+    helpmessage = open("files\helpMessage.txt", "r", encoding = "utf-8")
+    await ctx.send(helpmessage.read())
+    helpmessage.close()
 
 @bot.command()
 async def ripgeraldo(ctx):
-    with open ("files\geraldoMessage.txt", "r") as f:
-        geraldoMessage = f.read()
-    await ctx.send(geraldoMessage)
+    geraldomessage = open("files\geraldoMessage.txt", "r", encoding = "utf-8")
+    await ctx.send(geraldomessage.read())
+    geraldomessage.close()
 
 @bot.command()
 async def diga (ctx, *, message = "null"):
@@ -39,7 +39,6 @@ async def diga (ctx, *, message = "null"):
         await ctx.send("O que tu quer que eu fale porra?")
     else:
         await ctx.send(message)
-
 
 @bot.command(aliases = ["8ball"])
 async def bola8 (ctx, *, question = "null"):
