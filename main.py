@@ -34,20 +34,20 @@ async def ripgeraldo(ctx):
     geraldomessage.close()
 
 @bot.command()
-async def diga (ctx, *, message = "null"):
-    if (message == "null"):
+async def diga(ctx, *, message = None):
+    if (message == None):
         await ctx.send("O que tu quer que eu fale porra?")
     else:
         await ctx.send(message)
 
 @bot.command(aliases = ["8ball"])
-async def bola8 (ctx, *, question = "null"):
+async def bola8(ctx, *, question = None):
     responses = [
         "Com certeza!", 
-        "Já foi decidido que sim.",
+        "Decididamente que sim.",
         "Sem dúvidas!",
         "Sim, definitivamente.", 
-        "Você pode contar com isso.", 
+        "Você pode contar que sim.", 
         "Pelo que eu vejo, sim.", 
         "Ao que tudo indica, sim.", 
         "Parece que sim.", 
@@ -63,14 +63,28 @@ async def bola8 (ctx, *, question = "null"):
         "Minhas fontes dizem que não.", 
         "Parece que não.", 
         "Aparentemente não."]
-    if (question == "null"):
+    if (question == None):
         await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
     else:
         await ctx.send ("Tu perguntou: \"" + question + "\"\n" + random.choice(responses))
 
 @bot.command()
-async def apagar (ctx, amount = 1):
+async def apagar(ctx, amount = 1):
     await ctx.channel.purge(limit = (amount + 1))
+
+@bot.command(aliases = ["kick"])
+async def expulsar(ctx, member:discord.Member, *, reason = None):
+    if (reason == None):
+        await member.kick()
+    else:
+        await member.kick(reason = reason)
+
+@bot.command(aliases = ["ban"])
+async def banir(ctx, member:discord.Member, *, reason = None):
+    if (reason == None):
+        await member.kick()
+    else:
+        await member.kick(reason = reason)
 
 #Iniciação do bot
 
