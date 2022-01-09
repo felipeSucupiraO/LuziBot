@@ -66,7 +66,7 @@ async def bola8(ctx, *, question = None):
         "Aparentemente não."]
     if (question != None):
         await ctx.send ("Tu perguntou: \"" + question + "\"\n" + "Deixa eu pensar...")  
-        ctx.trigger_typing()
+        await ctx.trigger_typing()
         await asyncio.sleep(5)
         await ctx.send (random.choice(responses))
     else:
