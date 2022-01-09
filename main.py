@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from discord.ext import commands
 import random
@@ -63,50 +64,53 @@ async def bola8(ctx, *, question = None):
         "Minhas fontes dizem que não.", 
         "Parece que não.", 
         "Aparentemente não."]
-    if (question == None):
+    if (question != None):
+        await ctx.send ("Tu perguntou: \"" + question + "\"\n" + "Deixa eu pensar...")  
+        ctx.trigger_typing()
+        await asyncio.sleep(5)
+        await ctx.send (random.choice(responses))
+    else:
         await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
-    else:
-        await ctx.send ("Tu perguntou: \"" + question + "\"\n" + random.choice(responses))
 
-@bot.command()
-async def apagar(ctx, amount = 0):
-    if (amount > 10):
-        amount = 10
-    await ctx.channel.purge(limit = (amount + 1))
-
-@bot.command(aliases = ["kick"])
-async def expulsar(ctx, member:discord.Member, *, reason = None):
-    for i in ctx.author.roles:
-        if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
-            éOMarvado = True
-        else:
-            éOMarvado = False
+#@bot.command()
+#async def apagar(ctx, amount = 0):
+#    if (amount > 10):
+#        amount = 10
+#    await ctx.channel.purge(limit = (amount + 1))
+#
+#@bot.command(aliases = ["kick"])
+#async def expulsar(ctx, member:discord.Member, *, reason = None):
+#    for i in ctx.author.roles:
+#        if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
+#            éOMarvado = True
+#        else:
+#            éOMarvado = False
 #This for will see if the author has any of the roles needed to normally ban people, than giving him access to this command if this is the case
-
-    if (éOMarvado == True):
-        if (reason == None):
-            await member.kick()
-        else:
-            await member.kick(reason = reason)
-    else:
-        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
-
-@bot.command(aliases = ["ban"])
-async def banir(ctx, member:discord.Member, *, reason = None):
-    for i in ctx.author.roles:
-        if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
-            éOMarvado = True
-        else:
-            éOMarvado = False
+#
+#    if (éOMarvado == True):
+#        if (reason == None):
+#            await member.kick()
+#        else:
+#            await member.kick(reason = reason)
+#    else:
+#        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
+#
+#@bot.command(aliases = ["ban"])
+#async def banir(ctx, member:discord.Member, *, reason = None):
+#    for i in ctx.author.roles:
+#        if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
+#            éOMarvado = True
+#        else:
+#            éOMarvado = False
 #This for will see if the author has any of the roles needed to normally ban people, than giving him access to this command if this is the case
-
-    if (éOMarvado == True):
-        if (reason == None):
-            await member.ban()
-        else:
-            await member.ban(reason = reason)
-    else:
-        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
+#
+#    if (éOMarvado == True):
+#        if (reason == None):
+#            await member.ban()
+#        else:
+#            await member.ban(reason = reason)
+#    else:
+#        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
 
 #Iniciação do bot
 
