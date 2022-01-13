@@ -6,6 +6,7 @@ Lista de comandos (prefixo "luzi")
 - "ripgeraldo": Luzi faz uma homenagem ao primário e originário geraldo.
 - "diga": Luzi dirá qualquer coisa que você quiser, se você colocar a coisa separada por um espaço.
 - "bola8": Faça uma pergunta de sim ou não para Luzi e era responderá com toda sua sabedoria.
+- "voto": Escreva uma questão depois e o conselho poderá voltar à favor ou contra.
 - "apagar": Apaga uma quantidade de mensagens do canal, determinada pelo número teclado depois do comando. (desligado)
 - "expulsar": Expulsa um filha da puta. Digite o @ da pessoa depois do comando e o motivo depois, mas só se quiser, você não é obrigado a dar satisfação. (desligado)
 - "banir": Bane um filha da puta, exatamente do mesmo jeito do comando de expulsar. (desligado)

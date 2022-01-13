@@ -43,7 +43,7 @@ async def diga(ctx, *, message = None):
 
 @bot.command(aliases = ["8ball"])
 async def bola8(ctx, *, question = None):
-    responses = [
+    responses = [ 
         "Com certeza!", 
         "Decididamente que sim.",
         "Sem dúvidas!",
@@ -72,11 +72,47 @@ async def bola8(ctx, *, question = None):
     else:
         await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
 
+@bot.command()
+async def voto(ctx, *, situation):
+    
+    await ctx.send(situation + "\nO conselho tem 3 minutos para decidir.")
+    firstMessage = ctx.channel.last_message
+    await firstMessage.add_reaction("<:pyes:700337751597383691>")
+    await firstMessage.add_reaction("<:pno:700337705510502512>")
+    await asyncio.sleep(180)
+
+    yesCount = 0
+    noCount = 0
+    for i in firstMessage.reactions:
+        if (i.emoji.name == "pyes"):
+            yesCount = i.count
+        elif (i.emoji.name == "pno"):
+            noCount = i.count
+    if (yesCount > noCount):
+        await ctx.send ("\"" + situation + "\"\nO conselho decidiu que sim.")
+    elif (noCount > yesCount):
+        await ctx.send ("\"" + situation + "\"\nO conselho decidiu que não.")
+    else:
+        await ctx.send ("\"" + situation + "\"\nO conselho não consegui tomar uma decisão.")
+
+@bot.command()
+async def teste (ctx):
+    await ctx.send ("teste1")
+    await ctx.send ("teste2")
+
 #@bot.command()
 #async def apagar(ctx, amount = 0):
-#    if (amount > 10):
-#        amount = 10
-#    await ctx.channel.purge(limit = (amount + 1))
+#    canDelete = None
+#    for permission in ctx.author.permissions_in(ctx):
+#        if (permission.manage_messages == True):
+#            canDelete = True
+#
+#    if (canDelete == True):
+#        if (amount > 10):
+#            amount = 10
+#        await ctx.channel.purge(limit = (amount + 1))
+#    else:
+#        await ctx.send("Você não pode apagar mensagens seu plebeu")
 #
 #@bot.command(aliases = ["kick"])
 #async def expulsar(ctx, member:discord.Member, *, reason = None):
