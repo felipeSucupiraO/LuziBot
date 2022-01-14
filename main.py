@@ -24,13 +24,13 @@ async def oi(ctx):
 
 @bot.command()
 async def helpie(ctx):
-    helpmessage = open("files\helpMessage.txt", "r", encoding = "utf-8")
+    helpmessage = open(".\files\helpMessage.txt", "r", encoding = "utf-8")
     await ctx.send(helpmessage.read())
     helpmessage.close()
 
 @bot.command()
 async def ripgeraldo(ctx):
-    geraldomessage = open("files\geraldoMessage.txt", "r", encoding = "utf-8")
+    geraldomessage = open(".\files\geraldoMessage.txt", "r", encoding = "utf-8")
     await ctx.send(geraldomessage.read())
     geraldomessage.close()
 
