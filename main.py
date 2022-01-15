@@ -102,20 +102,17 @@ async def teste (ctx):
     await ctx.send ("teste1")
     await ctx.send ("teste2")
 
-#@bot.command()
-#async def apagar(ctx, amount = 0):
-#    canDelete = None
-#    for permission in ctx.author.permissions_in(ctx):
-#        if (permission.manage_messages == True):
-#            canDelete = True
-#
-#    if (canDelete == True):
-#        if (amount > 10):
-#            amount = 10
-#        await ctx.channel.purge(limit = (amount + 1))
-#    else:
-#        await ctx.send("Você não pode apagar mensagens seu plebeu")
-#
+@bot.command()
+async def apagar(ctx, amount = 0):
+    author = ctx.author
+
+    if (author.permissions_in(ctx.channel).manage_messages == True):
+        if (amount > 10):
+            amount = 10
+        await ctx.channel.purge(limit = (amount + 1))
+    else:
+        await ctx.send("Você não pode apagar mensagens seu plebeu")
+
 #@bot.command(aliases = ["kick"])
 #async def expulsar(ctx, member:discord.Member, *, reason = None):
 #    for i in ctx.author.roles:
