@@ -2,7 +2,9 @@ import asyncio
 import discord
 from discord.ext import commands
 import random
+from pathlib import Path
 
+root_path = Path(__file__).resolve().parent
 
 bot = commands.Bot(command_prefix = "luzi ")
 
@@ -24,13 +26,13 @@ async def oi(ctx):
 
 @bot.command()
 async def helpie(ctx):
-    helpmessage = open(".\files\helpMessage.txt", "r", encoding = "utf-8")
+    helpmessage = open(root_path / "files" / "helpMessage.txt", "r", encoding = "utf-8")
     await ctx.send(helpmessage.read())
     helpmessage.close()
 
 @bot.command()
 async def ripgeraldo(ctx):
-    geraldomessage = open(".\files\geraldoMessage.txt", "r", encoding = "utf-8")
+    geraldomessage = open(root_path / "files" / "geraldoMessage.txt", "r", encoding = "utf-8")
     await ctx.send(geraldomessage.read())
     geraldomessage.close()
 
