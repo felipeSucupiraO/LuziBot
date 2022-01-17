@@ -1,0 +1,3 @@
+Lista de comandos de configuração (prefixo "luzi config")
+
+- "tempovoto" = Define o tempo de voto para o comando "luzi voto".

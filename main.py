@@ -25,10 +25,15 @@ async def oi(ctx):
     await ctx.send("Olá, prazer, Luzineria, agora cala a boca e trás a porra da gasolina caralho")
 
 @bot.command()
-async def helpie(ctx):
-    helpmessage = open(root_path / "files" / "helpMessage.txt", "r", encoding = "utf-8")
-    await ctx.send(helpmessage.read())
-    helpmessage.close()
+async def helpie(ctx, category = None):
+    if(category == "config"):
+        configHelpMessage = open(root_path / "files" / "configHelpMessage.txt", "r", encoding = "utf-8")
+        await ctx.send(configHelpMessage.read())
+        configHelpMessage.close()
+    elif (category == None):
+        helpmessage = open(root_path / "files" / "helpMessage.txt", "r", encoding = "utf-8")
+        await ctx.send(helpmessage.read())
+        helpmessage.close()
 
 @bot.command()
 async def ripgeraldo(ctx):
@@ -75,27 +80,30 @@ async def bola8(ctx, *, question = None):
         await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
 
 @bot.command()
-async def voto(ctx, *, situation):
+async def voto(ctx, *, situation = None):
     
-    await ctx.send(situation + "\nO conselho tem 3 minutos para decidir.")
-    firstMessage = ctx.channel.last_message
-    await firstMessage.add_reaction("<:pyes:700337751597383691>")
-    await firstMessage.add_reaction("<:pno:700337705510502512>")
-    await asyncio.sleep(180)
-
-    yesCount = 0
-    noCount = 0
-    for i in firstMessage.reactions:
-        if (i.emoji.name == "pyes"):
-            yesCount = i.count
-        elif (i.emoji.name == "pno"):
-            noCount = i.count
-    if (yesCount > noCount):
-        await ctx.send ("\"" + situation + "\"\nO conselho decidiu que sim.")
-    elif (noCount > yesCount):
-        await ctx.send ("\"" + situation + "\"\nO conselho decidiu que não.")
+    if (situation == None):
+        await ctx.send("Qual é a questão pra votar po?")
     else:
-        await ctx.send ("\"" + situation + "\"\nO conselho não consegui tomar uma decisão.")
+        await ctx.send(situation + "\nO conselho tem {} minuto(s) para decidir.".format(votoTime))
+        firstMessage = ctx.channel.last_message
+        await firstMessage.add_reaction("<:pyes:700337751597383691>")
+        await firstMessage.add_reaction("<:pno:700337705510502512>")
+        await asyncio.sleep(votoTime * 60)
+
+        yesCount = 0
+        noCount = 0
+        for i in firstMessage.reactions:
+            if (i.emoji.name == "pyes"):
+                yesCount = i.count
+            elif (i.emoji.name == "pno"):
+                noCount = i.count
+        if (yesCount > noCount):
+            await ctx.send ("\"" + situation + "\"\nO conselho decidiu que sim.")
+        elif (noCount > yesCount):
+            await ctx.send ("\"" + situation + "\"\nO conselho decidiu que não.")
+        else:
+            await ctx.send ("\"" + situation + "\"\nO conselho ficou dividido não conseguiu tomar uma decisão.")
 
 @bot.command()
 async def teste (ctx):
@@ -112,6 +120,16 @@ async def apagar(ctx, amount = 0):
         await ctx.channel.purge(limit = (amount + 1))
     else:
         await ctx.send("Você não pode apagar mensagens seu plebeu")
+
+#Setting um global variables for the config command
+votoTime = 3
+
+@bot.command()
+async def config (ctx, parameter, value = 0):
+    if (parameter == "tempovoto"):
+        global votoTime
+        votoTime = value
+        await ctx.send("O tempo de voto agora passou a ser de " + str(votoTime) + " minuto(s).")
 
 #@bot.command(aliases = ["kick"])
 #async def expulsar(ctx, member:discord.Member, *, reason = None):
