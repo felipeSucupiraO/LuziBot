@@ -1,0 +1,107 @@
+LuzineriaBot Patch 2.0.1
+- Criação do repositório remoto do bot usando git e github
+- Criação do arquivo README para a descrição do github
+- Criação do arquivo de requirements para o heroku, ainda vazio
+- Preparação do setup básico do bot
+- Criação da mensagem de iniciação do bot no console
+- Criação dos primeiros comandos (luzi oi, luzi help e luzi ping)
+
+LuzineriaBot Patch 2.1.1
+- Preparação de vários arquivos para o heroku (site que hospedará o bot)
+	- Criação do arquivo .gitnore predefinido
+	- Criação do arquivo runtime
+	- Completando o arquivo requirements
+	- Criação do arquivo procfile
+- Organização de vários arquivos para o heroku
+	- .gitnore, runtime, requirements e Procfile movidos para a pasta "heroku stuff"
+- Pequenas mudanças no bot
+	- Pequena mudança na mensagem de iniciação
+
+LuzineriaBot Patch 2.2.1
+- Total reestruturação da estrutuda do código para transformar o client em uma classe
+- Concerto do uso da mensagem de ajuda em arquivo de texto
+- Desorganização dos arquivos do heroku
+	- Tirando os arquivos .gitnore, Procfile, runtime, requirements da pasta "heroku stuff"
+
+
+LuzineriaBot Patch 2.2.2
+- Restruturação da estrutura do código para usar o client.event
+- Organização da conta do bot
+    - Colocação do ícone do bot
+    - Complementação do README
+- Criação do comando "geraldoMessage"
+	- Criação no código
+	- Criação do arquivo contendo a mensagem
+	- Adição no comando help
+
+LuzineriaBot Patch 2.3.1
+- Nova reestruturação da estrutura do código para usar o discord.ext commands
+
+LuzineriaBot Patch 2.3.2
+- Pequena mudança no comando Ping
+	- Agora ele também mostra a latência do bot
+	- Mudança na mensagem de ajuda
+- Pequena otimização no uso dos arquivos
+	- Uso da função "open" dentro dos comandos
+
+LuzineriaBot Patch 2.3.3
+- Criação do comando "diga"
+	- Criação do comando no código
+	- Adição na mensagem de ajuda
+- Mudança na mensagem de ajuda do comando "ripgeraldo"
+
+LuzineriaBot Patch 2.3.4
+- Criação do comando "bola8"
+	- Importação da classe "random" do python
+	- Criação do comando no código
+	- Adição na mensagem de ajuda
+- Concerto do problema com o heroku
+	- Remoção de "random" do arquivo "requirements"
+	- Remoção da importação de "null" do asyncio.windows_events no código
+
+LuzineriaBot Patch 2.4.1
+- Criação do comando "apagar"
+	- Criação do comando no código
+	- Adição na mensagem de ajuda
+- Otimizações em vários comandos
+	- Adição de comentários para separar as partes do código
+	- Mudança na mensagem do comando "oi"
+	- Criação de uma resposta caso não haja mensagem no comando "diga"
+	- Criação de uma resposta cajo não haja pergunta no comando "bola8"
+	- Melhoria na resposta do comando "bola8"
+	- Correções de gramática na mensagem de ajuda
+- Concerto da leitura de arquivos
+	- Uso correto das funções "open" e "close"
+
+LuzineriaBot Patch 2.5.1
+- Criação dos comandos de banir e expulsar
+	- Criação no código
+	- Adição na mensagem de ajuda
+- Pequenas otimizações no código
+	- Uso do valor "none" no lugar de uma string contendo "null"
+	- Mudança em algumas respostas do comando "bola8"
+
+LuzineriaBot Patch 2.6.1
+- Criação de algumas medidas de segurança
+	- Criação de um limite para o número de mensagens apagadas com o comando "apagar"
+	- Adição de um limitador que permite a apenas três cargos específicos (opana, fake opana e escravos) o uso dos comandos "banir" e "expulsar"
+	- Desativação dos comandos "apagar", "banir" e "expulsar"
+
+LuzineriaBot Patch 2.7.1
+- Melhorias no comando "bola8"
+	- Pequeno intervalo para enviar a mensagem, tempo em que o bot aparece digitando
+	- Criação de uma resposta cajo não haja pergunta
+
+LuzineriaBot Patch 2.8.1
+- Criação do comando "voto"
+	- Criação no cógido
+	- Adição na mensagem de ajuda
+- Criação de nova medida de segurança no comando "apagar"
+	- Comando limitado apenas para aqueles que já tem permissão para apagar mensagens
+- Concerto na leitura de arquivos
+
+LuzineriaBot Patch 2.9.1
+- Concerto na leitura de arquivos (agradecimentos especiais ao Cris)
+	- Importação da classe "Path" do pathlib do python
+	- Uso do atributo "parent" para identificar apropriadamente a raiz do programa
+- Concerto da nova medida de segurança do comando "apagar"
