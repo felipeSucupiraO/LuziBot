@@ -105,3 +105,6 @@ LuzineriaBot Patch 2.9.1
 	- Importação da classe "Path" do pathlib do python
 	- Uso do atributo "parent" para identificar apropriadamente a raiz do programa
 - Concerto da nova medida de segurança do comando "apagar"
+
+LuzineriaBot Patch 2.9.2
+- Criação do arquivo changelog.txt
