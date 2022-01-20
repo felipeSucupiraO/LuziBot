@@ -108,3 +108,16 @@ LuzineriaBot Patch 2.9.1
 
 LuzineriaBot Patch 2.9.2
 - Criação do arquivo changelog.txt
+
+LuzineriaBot Patch 2.10.1
+- Pequenas otimizações no código
+	- Mudança da nomenclatura "bot" para "client"
+	- Pequenos comentários para organização
+	- Uso do ".format" em todas as strings do código
+	- Melhoria nos if statements de casos sem argumento nos comandos
+- Otimização na desativação dos comandos "banir" e "expulsar"
+- Adição de uma mensagem na iniciação do bot
+	- Criação do arquivo externo contendo a mensagem de iniciação
+- Mudança do nome do comando "helpie", que passou a ser "help"
+- Criação do comando "vera"
+	- Adição na mensagem de ajuda
