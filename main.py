@@ -111,6 +111,7 @@ async def voto(ctx, *, situation = None):
     await firstMessage.add_reaction("<:pyes:700337751597383691>")
     await firstMessage.add_reaction("<:pno:700337705510502512>")
     await asyncio.sleep(votoTime * 60)
+
     yesCount = 0
     noCount = 0
     for i in firstMessage.reactions:
@@ -127,7 +128,9 @@ async def voto(ctx, *, situation = None):
 
 @client.command()
 async def teste (ctx):
-    ctx.send ("teste1")
+    await asyncio.sleep(10)
+    message = ctx.channel.last_message
+    await asyncio.sleep(10)
 
 @client.command()
 async def apagar(ctx, amount = 0):
@@ -139,6 +142,24 @@ async def apagar(ctx, amount = 0):
         await ctx.channel.purge(limit = (amount + 1))
     else:
         await ctx.send("Você não pode apagar mensagens seu plebeu")
+
+@client.command()
+async def vera(ctx):
+    server = ctx.guild
+    await server.create_text_channel("vera")
+    for channel in server.channels:
+        if (channel.name == "vera"):
+            channelVera = channel
+    
+    counter = 1
+    while (counter <= 10):
+        await channelVera.send("<:smallvera:742756448085475449>")
+        message = channelVera.last_message
+        await message.add_reaction("<:smallvera:742756448085475449>")
+        await message.add_reaction("<:microvera:742841219574661133>")
+        await message.add_reaction("<:nanovera:742840914015420597>")
+        await message.add_reaction("<:quantumvera:756146161840029846>")
+        counter = counter + 1
 
 #Setting um global variables for the config command
 votoTime = 3

@@ -11,3 +11,4 @@ Lista de comandos (prefixo "luzi")
 - "apagar": Apaga uma quantidade de mensagens do canal, determinada pelo número teclado depois do comando.
 - "expulsar": Expulsa um filha da puta. Digite o @ da pessoa depois do comando e o motivo depois, mas só se quiser, você não é obrigado a dar satisfação. (desligado)
 - "banir": Bane um filha da puta, exatamente do mesmo jeito do comando de expulsar. (desligado)
+- "vera": Vera
