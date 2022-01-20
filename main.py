@@ -6,19 +6,29 @@ from pathlib import Path
 
 root_path = Path(__file__).resolve().parent
 
-client = commands.Bot(command_prefix = "luzi ")
+client = commands.Bot(command_prefix = "luzi ", help_command = None)
 
 
 #Events
+
+starterChannelList = []
 
 @client.event
 async def on_ready():
     print ("Bot is online")
     print ("Logged in as {}".format(client.user.name))
 
-@client.event
-async def on_error():
-    client.send("Deu ruim")
+    for server in client.guilds:
+        for channel in server.channels:
+            if (channel.type.name == "text"):
+                starterChannelList.append(channel)
+                break
+
+    
+    for channel in starterChannelList:
+        startMessage = open(root_path / "files" / "startMessage.txt", "r", encoding = "utf-8")
+        await channel.send(startMessage.read())
+        startMessage.close()
 
 
 #Commands
@@ -31,8 +41,8 @@ async def ping(ctx):
 async def oi(ctx):
     await ctx.send("Olá, prazer, Luzineria, agora cala a boca e trás a porra da gasolina caralho")
 
-@client.command()
-async def helpie(ctx, category = None):
+@client.command(aliases = ["ajuda"])
+async def help(ctx, category = None):
     if(category == "config"):
         configHelpMessage = open(root_path / "files" / "configHelpMessage.txt", "r", encoding = "utf-8")
         await ctx.send(configHelpMessage.read())
