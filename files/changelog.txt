@@ -23,7 +23,6 @@ LuzineriaBot Patch 2.2.1
 - Desorganização dos arquivos do heroku
 	- Tirando os arquivos .gitnore, Procfile, runtime, requirements da pasta "heroku stuff"
 
-
 LuzineriaBot Patch 2.2.2
 - Restruturação da estrutura do código para usar o client.event
 - Organização da conta do bot
@@ -121,3 +120,15 @@ LuzineriaBot Patch 2.10.1
 - Mudança do nome do comando "helpie", que passou a ser "help"
 - Criação do comando "vera"
 	- Adição na mensagem de ajuda
+
+LuzineriaBot Patch 2.11.1
+- Adição de novas configurações
+	- Adição da configuração para canal principal do server
+	- Adição da configuração para o cargo incial de novos integrantes do server
+	- Adição das novas configurações ao comando de ajuda
+- Organização dos coletadores de informação para ser exclusivo de cada server
+- Criação dos eventos para entrada e saída de membros (não funciona lmao)
+	- Criação de mensagem de boas vindas para novos membros
+	- Adição automática de cargo inicial para novos membros
+	- Criação de mensagem de despedida para membros saíndo do servidor
+- Limitação do comando "Vera" apenas para dois cargos específicos em todo discord
