@@ -1,3 +1,5 @@
 Lista de comandos de configuração (prefixo "luzi config")
 
-- "tempovoto" = Define o tempo de voto para o comando "luzi voto".
+- "tempovoto": Define o tempo de voto para o comando "luzi voto".
+- "canalprincipal": Define o canal onde Luzi mandará algumas mensagens, como as boas vindas à novos membros.
+- "cargoinicial": Define o cargo inicial para novos membros do servidor.

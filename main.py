@@ -8,27 +8,49 @@ root_path = Path(__file__).resolve().parent
 
 client = commands.Bot(command_prefix = "luzi ", help_command = None)
 
+#Setting um global variables for the config command
+serverList = [None]
+votoTimeList = [None]
+mainChannelList = [None]
+initialRoleList = [None]
 
 #Events
-
-starterChannelList = []
 
 @client.event
 async def on_ready():
     print ("Bot is online")
     print ("Logged in as {}".format(client.user.name))
 
+    i = 1
     for server in client.guilds:
-        for channel in server.channels:
-            if (channel.type.name == "text"):
-                starterChannelList.append(channel)
-                break
+        #This variable is used to make the if statement run just in the first for loop
+        if (i == 1):
+            serverList[0] = server
+            votoTimeList[0] = 3
+            mainChannelList[0] = None
+            initialRoleList[0] = None
+        else:
+            serverList.append(server)
+            votoTimeList.append(3)
+            mainChannelList.append(None)
+            initialRoleList.append(None)
+        # These statements organize an array containing all the servers the bot is currently in and create arrays for information of the same lenght of the servers
+        i = i + 1
 
+@client.event
+async def on_member_join(member):
+    mainChannel = member.guild.get_channel(mainChannelList[serverList.index(member.guild)])
+    initialRole = member.guild.get_role(initialRoleList[serverList.index(member.guild)])
+
+    mainChannel.send ("{} agora faz parte do clube da luta. Já sabe a primeira regra né?".format(member.name))
+
+    member.add_roles(initialRole)
+
+@client.event
+async def on_member_remove(member):
+    mainChannel = member.guild.get_channel(mainChannelList[serverList.index(member.guild)])
     
-    for channel in starterChannelList:
-        startMessage = open(root_path / "files" / "startMessage.txt", "r", encoding = "utf-8")
-        await channel.send(startMessage.read())
-        startMessage.close()
+    mainChannel.send("Adeus {}, obrigado por não apagar o geraldo.".format(member.name))
 
 
 #Commands
@@ -101,6 +123,7 @@ async def bola8(ctx, *, question = None):
 
 @client.command()
 async def voto(ctx, *, situation = None):
+    votoTime = int(votoTimeList[serverList.index(ctx.guild)])
     
     if (situation == None):
         await ctx.send("Qual é a questão pra votar po?")
@@ -128,9 +151,8 @@ async def voto(ctx, *, situation = None):
 
 @client.command()
 async def teste (ctx):
-    await asyncio.sleep(10)
-    message = ctx.channel.last_message
-    await asyncio.sleep(10)
+    mainChannel = ctx.guild.get_channel(mainChannelList[serverList.index(ctx.guild)])
+    await mainChannel.send("teste")
 
 @client.command()
 async def apagar(ctx, amount = 0):
@@ -145,6 +167,13 @@ async def apagar(ctx, amount = 0):
 
 @client.command()
 async def vera(ctx):
+    for role in ctx.author.roles:
+        if (role.id == "449251888592977932" or role.id == "744997848155816086"):
+            break
+        else:
+            await ctx.send ("Você não é digno.")
+            return
+
     server = ctx.guild
     await server.create_text_channel("vera")
     for channel in server.channels:
@@ -161,19 +190,36 @@ async def vera(ctx):
         await message.add_reaction("<:quantumvera:756146161840029846>")
         counter = counter + 1
 
-#Setting um global variables for the config command
-votoTime = 3
-
 @client.command()
-async def config (ctx, parameter = None, value = 0):
+async def config (ctx, parameter = None, value = None):
     if (parameter == None):
         await ctx.send ("Qual configuração você quer alterar?")
         return
 
     if (parameter == "tempovoto"):
-        global votoTime
-        votoTime = value
-        await ctx.send("O tempo de voto agora passou a ser de {} minuto(s).".format(str(votoTime)))
+        global votoTimeList
+        finalValue = int(value)
+        votoTimeList[serverList.index(ctx.guild)] = finalValue
+        await ctx.send("O tempo de voto agora passou a ser de {} minuto(s).".format(value))
+
+    if (parameter == "canalprincipal"):
+        global mainChannelList
+        finalValue = value.replace ("<", "")
+        finalValue = finalValue.replace (">", "")
+        finalValue = int(finalValue.replace ("#", ""))
+        mainChannelList[serverList.index(ctx.guild)] = finalValue
+        await ctx.send("Agora o meu canal principal é {}".format(value))
+
+    if(parameter == "cargoinicial"):
+        global initialRoleList
+        finalValue = value.replace ("<", "")
+        finalValue = finalValue.replace (">", "")
+        finalValue = finalValue.replace ("@", "")
+        finalValue = int(finalValue.replace ("&", ""))
+        initialRoleList[serverList.index(ctx.guild)] = finalValue
+        await ctx.send("Agora o cargo para novos membros do server é {}".format(value))
+
+    # The statements are made in a way that each server has it's own configurations in the array, in a way that the index of the configuration is the same of the index of the respective guild on the "serversList" array 
 
 @client.command(aliases = ["kick"])
 async def expulsar(ctx, member:discord.Member = None, *, reason = None):
