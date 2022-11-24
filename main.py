@@ -273,4 +273,4 @@ async def banir(ctx, member:discord.Member = None, *, reason = None):
 
 #Iniciação do client
 
-client.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.YW300g.dYiDqb6Nnl1TK03OpnJ5LfBId8U')
+client.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.Glnoiq.lh-bHUdMiJ8-kZiM_xgsxn1a0B8y3113Lai3pw')
