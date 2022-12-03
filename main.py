@@ -250,4 +250,4 @@ async def config (ctx, parameter = None, value = None):
 
 
 #Client's inicialization
-client.run('MTA0NTE5NDUwNzI1MzE5NDg0Mg.GFLRje.17kCFIzvESide1Fqj52v2JLZhhdOqTuHckt-g8')
+client.run('MTA0NTE5NDUwNzI1MzE5NDg0Mg.GDQaaZ.ppkC67KNhpMO_EI6txpaL1LDlJzk8wo-dA_opQ')
