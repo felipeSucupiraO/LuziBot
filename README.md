@@ -1,4 +1,7 @@
 # LuzineriaBot2.0
-This is the source code for LuzineriaBot2.0, the exlusive bot from the ElServer. She is a multifuncional bot with many functions, such as funny jokes related to our comunity and futurely, even the capability of playing youtube audios on calls.
+This is the source code for LuziBot, a general bot with standart commands. The main goal of this project was to make a personal and unique bot to my private server with some friends and to get better at API usage, python, assynchronous programming and general project making (work with issues, github, updates, etc).
 
-Using the discord.py APi, the bot was made completely in Python.
+The bot was made completely in python using the discord.py API.
+
+The bot is not currently beeing run 24/7, but it can be put into a server and, if a computer is running the code, it works normally.
+Link to put the bot in a server:
