@@ -251,6 +251,4 @@ async def config (ctx, parameter = None, value = None):
 
 
 #Client's inicialization
-token = open(root_path / "files" / "token.txt", "r", encoding = "uft-8")
-client.run(token)
-token.close
+client.run(<TOKEN>)
