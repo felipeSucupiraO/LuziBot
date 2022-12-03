@@ -1,14 +1,12 @@
-Lista de comandos (prefixo "luzi")
+Commands List (prefix "luzi")
 
-- "helpie": Luzi apresenta a lista de todos os comandos.
-- "config": Define algumas configurações para Luzi. Para mais informações, digite "luzi helpie config".
-- "oi": Luzi se apresenta.
-- "ping": Luzi devolve, e aproveita pra falar o ping dela.
-- "ripgeraldo": Luzi faz uma homenagem ao primário e originário geraldo.
-- "diga": Luzi dirá qualquer coisa que você quiser, se você colocar a coisa separada por um espaço.
-- "bola8": Faça uma pergunta de sim ou não para Luzi e ela responderá com toda sua sabedoria.
-- "voto": Escreva uma questão depois do comando e o conselho poderá voltar à favor ou contra.
-- "apagar": Apaga uma quantidade de mensagens do canal, determinada pelo número teclado depois do comando.
-- "expulsar": Expulsa um filha da puta. Digite o @ da pessoa depois do comando e o motivo depois, mas só se quiser, você não é obrigado a dar satisfação. (desligado)
-- "banir": Bane um filha da puta, exatamente do mesmo jeito do comando de expulsar. (desligado)
-- "vera": Vera
+- "help": Shows this message.
+- "hello": Introducts itself.
+- "ping": Tells the latency.
+- "say": Says something you type.
+- "8ball": Awnsers a yer or no question.
+- "vote": Write an statement. People can vote through the reactions to choose yes or no.
+- "delete": Deletes a determined amount of messages.
+- "kick": Kicks someone. Type the person's @ after the command. You can optionally give the reason for the kick after the @. (off)
+- "ban": Bans someone. Type the person's @ after the command. You can optionally give the reason for the ban after the @. (off)
+- "config": Changes some of the bot's configurations. To get more info, type "luzi helpie config".

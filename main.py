@@ -8,14 +8,16 @@ root_path = Path(__file__).resolve().parent
 
 client = commands.Bot(command_prefix = "luzi ", help_command = None)
 
-#Setting um global variables for the config command
+
+#Setting some global variables for the config command
 serverList = [None]
-votoTimeList = [None]
+voteTimeList = [None]
 mainChannelList = [None]
 initialRoleList = [None]
+# These variables work to make each server have it's own configurations in the array by making the index of the configuration the same as the index of the respective server on the "serversList" array.
+
 
 #Events
-
 @client.event
 async def on_ready():
     print ("Bot is online")
@@ -23,47 +25,49 @@ async def on_ready():
 
     i = 1
     for server in client.guilds:
-        #This variable is used to make the if statement run just in the first for loop
+        #This variable is used to make the if statement run just in the first for loop, to then run only the else statement.
         if (i == 1):
             serverList[0] = server
-            votoTimeList[0] = 3
+            voteTimeList[0] = 3
             mainChannelList[0] = None
             initialRoleList[0] = None
         else:
             serverList.append(server)
-            votoTimeList.append(3)
+            voteTimeList.append(3)
             mainChannelList.append(None)
             initialRoleList.append(None)
-        # These statements organize an array containing all the servers the bot is currently in and create arrays for information of the same lenght of the servers
         i = i + 1
+        #These statements organize an array containing all the servers the bot is currently. Also, it creates arrays for information in which the lenght is the amount of servers, therefore, one variable for each server.
 
 @client.event
 async def on_member_join(member):
     mainChannel = member.guild.get_channel(mainChannelList[serverList.index(member.guild)])
     initialRole = member.guild.get_role(initialRoleList[serverList.index(member.guild)])
 
-    mainChannel.send ("{} agora faz parte do clube da luta. Já sabe a primeira regra né?".format(member.name))
+    mainChannel.send ("Welcome to the server, {}!".format(member.name))
 
     member.add_roles(initialRole)
+
 
 @client.event
 async def on_member_remove(member):
     mainChannel = member.guild.get_channel(mainChannelList[serverList.index(member.guild)])
     
-    mainChannel.send("Adeus {}, obrigado por não apagar o geraldo.".format(member.name))
+    mainChannel.send("Goodbye, {}!".format(member.name))
 
 
 #Commands
-
 @client.command()
 async def ping(ctx):
-    await ctx.send("Pong! Latência: {} ms".format(str(round(client.latency * 1000))))
+    await ctx.send("Pong! Latency: {}ms".format(str(round(client.latency * 1000))))
+
 
 @client.command()
-async def oi(ctx):
-    await ctx.send("Olá, prazer, Luzineria, agora cala a boca e trás a porra da gasolina caralho")
+async def hello(ctx):
+    await ctx.send("Hello, my name is Luzi! It is a pleasure to meet you!")
 
-@client.command(aliases = ["ajuda"])
+
+@client.command()
 async def help(ctx, category = None):
     if(category == "config"):
         configHelpMessage = open(root_path / "files" / "configHelpMessage.txt", "r", encoding = "utf-8")
@@ -74,88 +78,82 @@ async def help(ctx, category = None):
         await ctx.send(helpmessage.read())
         helpmessage.close()
 
-@client.command()
-async def ripgeraldo(ctx):
-    geraldomessage = open(root_path / "files" / "geraldoMessage.txt", "r", encoding = "utf-8")
-    await ctx.send(geraldomessage.read())
-    geraldomessage.close()
 
 @client.command()
-async def diga(ctx, *, message = None):
+async def say(ctx, *, message = None):
     if (message == None):
-        await ctx.send("O que tu quer que eu fale porra?")
+        await ctx.send("Tell me what you want me to say.")
         return
     
     await ctx.send(message)
 
+
 @client.command(aliases = ["8ball"])
-async def bola8(ctx, *, question = None):
+#Here, the name of the function isn't the actual command because apparently you can't start with a number
+async def ball(ctx, *, question = None):
     responses = [ 
-        "Com certeza!", 
-        "Decididamente que sim.",
-        "Sem dúvidas!",
-        "Sim, definitivamente.", 
-        "Você pode contar que sim.", 
-        "Pelo que eu vejo, sim.", 
-        "Ao que tudo indica, sim.", 
-        "Parece que sim.", 
-        "Sim", 
-        "Os sinais dizem que sim.", 
-        "Está muito vago para dizer. Tente novamente.", 
-        "Pergunte novamente mais tarde.", 
-        "É melhor não te dizer agora.", 
-        "Não consigo prever agora.", 
-        "Se concentre e pergunte novamente.", 
-        "Não conte com isso.", 
-        "Minha resposta é não.", 
-        "Minhas fontes dizem que não.", 
-        "Parece que não.", 
-        "Aparentemente não."]
+        "For sure!", 
+        "Decidedly yes.",
+        "Undoubtedly!",
+        "Yes, definitely.", 
+        "You can count on a yes.", 
+        "From my perspective, yes.", 
+        "Seemingly, yes.", 
+        "It seems so.", 
+        "Yes", 
+        "The sinals says yes.", 
+        "It is too vague to tell. Try again.", 
+        "Ask again later.", 
+        "It's better not to tell you now.", 
+        "I can't tell now.", 
+        "Concentrate and ask again.", 
+        "Don't count on this.", 
+        "My awnser is no.", 
+        "My sources says no.", 
+        "It don't seems so.", 
+        "Aparently, no."]
 
     if (question == None):
-        await ctx.send ("Faça o favor de colocar a pergunta pra eu responder gênio")
+        await ctx.send ("Put your question after the command")
         return
     
-    await ctx.send ("Tu perguntou: \"{}\" \n" + "Deixa eu pensar...".format(question))  
+    await ctx.send ("Your question: \"{}\" \n" + "Let me think...".format(question))  
     await ctx.trigger_typing()
     await asyncio.sleep(5)
     await ctx.send (random.choice(responses))
 
+
 @client.command()
-async def voto(ctx, *, situation = None):
-    votoTime = int(votoTimeList[serverList.index(ctx.guild)])
+async def vote(ctx, *, situation = None):
+    voteTime = int(voteTimeList[serverList.index(ctx.guild)])
     
     if (situation == None):
-        await ctx.send("Qual é a questão pra votar po?")
+        await ctx.send("What do you want to vote for?")
         return
     
-    await ctx.send(situation + "\nO conselho tem {} minuto(s) para decidir.".format(votoTime))
+    await ctx.send(situation + "\nYou have {} minute(s) to decide.".format(voteTime))
     firstMessage = ctx.channel.last_message
-    await firstMessage.add_reaction("<:pyes:700337751597383691>")
-    await firstMessage.add_reaction("<:pno:700337705510502512>")
-    await asyncio.sleep(votoTime * 60)
+    await firstMessage.add_reaction("<:thumbsup:>")
+    await firstMessage.add_reaction("<:thumbsdown:>")
+    await asyncio.sleep(voteTime * 60)
 
     yesCount = 0
     noCount = 0
     for i in firstMessage.reactions:
-        if (i.emoji.name == "pyes"):
+        if (i.emoji.name == "thumbsup"):
             yesCount = i.count
-        elif (i.emoji.name == "pno"):
+        elif (i.emoji.name == "thumbsdown"):
             noCount = i.count
     if (yesCount > noCount):
-        await ctx.send ("\"{}\" \nO conselho decidiu que sim.".format(situation))
+        await ctx.send ("\"{}\" \nThe result of the vote was \"yes\".".format(situation))
     elif (noCount > yesCount):
-        await ctx.send ("\"{}\" \nO conselho decidiu que não.".format(situation))
+        await ctx.send ("\"{}\" \nThe result of the vote was \"no\".".format(situation))
     else:
-        await ctx.send ("\"{}\" \nO conselho ficou dividido e não conseguiu tomar uma desição.".format(situation))
+        await ctx.send ("\"{}\" \nThe voting ended up tied.".format(situation))
+
 
 @client.command()
-async def teste (ctx):
-    mainChannel = ctx.guild.get_channel(mainChannelList[serverList.index(ctx.guild)])
-    await mainChannel.send("teste")
-
-@client.command()
-async def apagar(ctx, amount = 0):
+async def delete(ctx, amount = 0):
     author = ctx.author
 
     if (author.permissions_in(ctx.channel).manage_messages == True):
@@ -163,114 +161,93 @@ async def apagar(ctx, amount = 0):
             amount = 10
         await ctx.channel.purge(limit = (amount + 1))
     else:
-        await ctx.send("Você não pode apagar mensagens seu plebeu")
+        await ctx.send("You don't have permission to delete messages.")
 
+
+#The kick and ban commands are not currently active because the role permission needed to use them is not working, therefore, anyone can use them.
 @client.command()
-async def vera(ctx):
-    for role in ctx.author.roles:
-        if (role.id == "449251888592977932" or role.id == "744997848155816086"):
-            break
-        else:
-            await ctx.send ("Você não é digno.")
-            return
-
-    server = ctx.guild
-    await server.create_text_channel("vera")
-    for channel in server.channels:
-        if (channel.name == "vera"):
-            channelVera = channel
-    
-    counter = 1
-    while (counter <= 10):
-        await channelVera.send("<:smallvera:742756448085475449>")
-        message = channelVera.last_message
-        await message.add_reaction("<:smallvera:742756448085475449>")
-        await message.add_reaction("<:microvera:742841219574661133>")
-        await message.add_reaction("<:nanovera:742840914015420597>")
-        await message.add_reaction("<:quantumvera:756146161840029846>")
-        counter = counter + 1
-
-@client.command()
-async def config (ctx, parameter = None, value = None):
-    if (parameter == None):
-        await ctx.send ("Qual configuração você quer alterar?")
-        return
-
-    if (parameter == "tempovoto"):
-        global votoTimeList
-        finalValue = int(value)
-        votoTimeList[serverList.index(ctx.guild)] = finalValue
-        await ctx.send("O tempo de voto agora passou a ser de {} minuto(s).".format(value))
-
-    if (parameter == "canalprincipal"):
-        global mainChannelList
-        finalValue = value.replace ("<", "")
-        finalValue = finalValue.replace (">", "")
-        finalValue = int(finalValue.replace ("#", ""))
-        mainChannelList[serverList.index(ctx.guild)] = finalValue
-        await ctx.send("Agora o meu canal principal é {}".format(value))
-
-    if(parameter == "cargoinicial"):
-        global initialRoleList
-        finalValue = value.replace ("<", "")
-        finalValue = finalValue.replace (">", "")
-        finalValue = finalValue.replace ("@", "")
-        finalValue = int(finalValue.replace ("&", ""))
-        initialRoleList[serverList.index(ctx.guild)] = finalValue
-        await ctx.send("Agora o cargo para novos membros do server é {}".format(value))
-
-    # The statements are made in a way that each server has it's own configurations in the array, in a way that the index of the configuration is the same of the index of the respective guild on the "serversList" array 
-
-@client.command(aliases = ["kick"])
-async def expulsar(ctx, member:discord.Member = None, *, reason = None):
+async def kick(ctx, member:discord.Member = None, *, reason = None):
     if (True == True):
-        await ctx.send("Comando desativado")
+        await ctx.send("Deactivated command")
         return
+    #This statement deactivates the command
 
     if (member == None):
-        await ctx.send("Você tem que dizer quem será o infeliz que será banido.")
+        await ctx.send("Who will be kicked?")
         return
 
     for i in ctx.author.roles:
         if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
-            éOMarvado = True
+            canKick = True
         else:
-            éOMarvado = False
-#This for will see if the author has any of the roles needed to normally ban people, than giving him access to this command if this is the case
+            canKick = False
+    #This for statement will check if the author has any of the roles needed to kick people and, if so, give access to the command.
 
-    if (éOMarvado == True):
+    if (canKick == True):
         if (reason == None):
             await member.kick()
         else:
             await member.kick(reason = reason)
     else:
-        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
-
-@client.command(aliases = ["ban"])
-async def banir(ctx, member:discord.Member = None, *, reason = None):
+        await ctx.send ("You cannot kick people.")
+@client.command()
+async def ban(ctx, member:discord.Member = None, *, reason = None):
     if (True == True):
-        await ctx.send("Comando desativado")
+        await ctx.send("Deactivated command")
         return
+    #This statement deactivates the command
 
     if (member == None):
-        await ctx.send("Você tem que dizer quem será o infeliz que será banido.")
+        await ctx.send("Who will be banned?")
         return
 
     for i in ctx.author.roles:
         if ((i.id == 449251888592977932) or (i.id == 744997848155816086) or (i.id == 840028423681343488)):
-            éOMarvado = True
+            canBan = True
         else:
-            éOMarvado = False
-#This for will see if the author has any of the roles needed to normally ban people, than giving him access to this command if this is the case
+            canBan = False
+    #This for statement will check if the author has any of the roles needed to ban people and, if so, give access to the command.
 
-    if (éOMarvado == True):
+    if (canBan == True):
         if (reason == None):
             await member.ban()
         else:
             await member.ban(reason = reason)
     else:
-        await ctx.send ("Tu não é o MARVADO, tu não pode expulsar ninguém.")
+        await ctx.send ("You cannot ban people.")
 
-#Iniciação do client
 
-client.run('ODk5Nzg1Nzk0MjQyMzU1MjUy.Glnoiq.lh-bHUdMiJ8-kZiM_xgsxn1a0B8y3113Lai3pw')
+#The config command is not properly working
+@client.command()
+async def config (ctx, parameter = None, value = None):
+    if (parameter == None):
+        await ctx.send ("Which configuration do you wish to change?")
+        return
+
+    if (parameter == "votetime"):
+        global voteTimeList
+        timeValue = int(value)
+        voteTimeList[serverList.index(ctx.guild)] = timeValue
+        #The line above changes the configuration in the global array. It gets the index of the server in the servers array and then use it to change the respective configuration array. That is the same aproach used in the other config commands.
+        await ctx.send("The voting time is now {} minute(s).".format(value))
+
+    if (parameter == "mainchannel"):
+        global mainChannelList
+        channelValue = value.replace ("<", "")
+        channelValue = channelValue.replace (">", "")
+        channelValue = int(channelValue.replace ("#", ""))
+        mainChannelList[serverList.index(ctx.guild)] = channelValue
+        await ctx.send("The main channel is now {}".format(value))
+
+    if(parameter == "initialrole"):
+        global initialRoleList
+        roleValue = value.replace ("<", "")
+        roleValue = roleValue.replace (">", "")
+        roleValue = roleValue.replace ("@", "")
+        roleValue = int(roleValue.replace ("&", ""))
+        initialRoleList[serverList.index(ctx.guild)] = roleValue
+        await ctx.send("The initial role is now {}".format(value))
+
+
+#Client's inicialization
+client.run('MTA0NTE5NDUwNzI1MzE5NDg0Mg.GFLRje.17kCFIzvESide1Fqj52v2JLZhhdOqTuHckt-g8')
