@@ -4,4 +4,4 @@ This is the source code for LuziBot, a general bot with standart commands. The m
 The bot was made completely in python using the discord.py API.
 
 The bot is not currently beeing run 24/7, but it can be put into a server and, if a computer is running the code, it works normally.
-Link to put the bot in a server:
+Link to put the bot in a server: https://discord.com/api/oauth2/authorize?client_id=1045194507253194842&permissions=8&scope=bot
