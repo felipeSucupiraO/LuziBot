@@ -6,7 +6,8 @@ from pathlib import Path
 
 root_path = Path(__file__).resolve().parent
 
-client = commands.Bot(command_prefix = "luzi ", help_command = None)
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix = "luzi ", help_command = None, intents = intents)
 
 
 #Setting some global variables for the config command
